@@ -33,7 +33,13 @@ public class UserController {
 
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
-        if (users.containsKey(user.getId())){
+        if (users.containsKey(user.getId())) {
+            if (user.getLogin().contains(" ")) {
+                throw new ValidationException("Логин должен быть без пробелов");
+            }
+            if (user.getName() == null || user.getName().isBlank()) {
+                user.setName(user.getLogin());
+            }
             users.put(user.getId(), user);
             return users.get(user.getId());
         } else {
