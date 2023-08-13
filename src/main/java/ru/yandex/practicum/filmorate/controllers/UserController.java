@@ -22,7 +22,7 @@ public class UserController {
             throw new ValidationException("Логин должен быть без пробелов");
         }
         user.setId(counter);
-        if (user.getName().isBlank()) {
+        if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
         }
         users.put(counter, user);
