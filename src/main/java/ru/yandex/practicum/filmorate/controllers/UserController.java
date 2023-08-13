@@ -18,13 +18,9 @@ public class UserController {
 
     @PostMapping
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
-        if (user.getLogin().contains(" ")) {
-            throw new ValidationException("Логин должен быть без пробелов");
-        }
+        validateLogin(user);
+        setDefaultName(user);
         user.setId(counter);
-        if (user.getName() == null || user.getName().isBlank()) {
-            user.setName(user.getLogin());
-        }
         users.put(counter, user);
         User newUser = users.get(counter);
         counter++;
@@ -34,12 +30,8 @@ public class UserController {
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
         if (users.containsKey(user.getId())) {
-            if (user.getLogin().contains(" ")) {
-                throw new ValidationException("Логин должен быть без пробелов");
-            }
-            if (user.getName() == null || user.getName().isBlank()) {
-                user.setName(user.getLogin());
-            }
+            validateLogin(user);
+            setDefaultName(user);
             users.put(user.getId(), user);
             return users.get(user.getId());
         } else {
@@ -52,4 +44,15 @@ public class UserController {
         return new ArrayList<>(users.values());
     }
 
+    private void validateLogin(User user) {
+        if (user.getLogin().contains(" ")) {
+            throw new ValidationException("Логин должен быть без пробелов");
+        }
+    }
+
+    private void setDefaultName(User user) {
+        if (user.getName() == null || user.getName().isBlank()) {
+            user.setName(user.getLogin());
+        }
+    }
 }
