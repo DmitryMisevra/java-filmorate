@@ -134,7 +134,7 @@ class UserControllerTest {
     }
 
     @Test
-    void UpdateUser() throws Exception {
+    void updateUser() throws Exception {
         String userJsonOne = "{"
                 + "\"name\": \"Nick Name\","
                 + "\"email\": \"mail@mail.ru\","
@@ -169,7 +169,7 @@ class UserControllerTest {
     }
 
     @Test
-    void UpdateUser_ShouldThrowValidationExceptionWithWrongId() throws Exception {
+    void updateUser_ShouldThrowValidationExceptionWithWrongId() throws Exception {
         String userJsonOne = "{"
                 + "\"name\": \"Nick Name\","
                 + "\"email\": \"mail@mail.ru\","
