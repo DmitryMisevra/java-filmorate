@@ -14,10 +14,10 @@ import java.util.*;
 @Slf4j
 public class UserController {
 
-    private int counter = 1;
-    private final Map<Integer, User> users = new HashMap<>();
+    private int counter = 1; /* счетчик id */
+    private final Map<Integer, User> users = new HashMap<>(); /* мапа, где хранятся фильмы. id - ключ */
 
-
+    /* добавляет юзера */
     @PostMapping
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
         validateLogin(user);
@@ -31,6 +31,7 @@ public class UserController {
         return newUser;
     }
 
+    /* обновляет юзера либо выбрасывает исключение */
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
         if (users.containsKey(user.getId())) {
@@ -45,17 +46,19 @@ public class UserController {
         }
     }
 
+    /* обновляет список сохраненных юзеров */
     @GetMapping
     public List<User> getUsersList() {
         log.debug("Текущее количество пользователей: {}", users.size());
         return new ArrayList<>(users.values());
     }
-
+    /* Очищает память контроллера. Сейчас используется для тестов */
     public void clearUserController() {
         counter = 1;
         users.clear();
     }
 
+    /* Вспомогательный метод. Валидирует логины на отсутствие пробелов */
     private void validateLogin(User user) throws ValidationException {
         if (user.getLogin().contains(" ")) {
             log.error("в логине обнаружены пробелы: {}", user.getLogin());
@@ -63,6 +66,7 @@ public class UserController {
         }
     }
 
+    /* Вспомогательный метод. Если имя пустое, именем становится логин */
     private void setDefaultName(User user) {
         if (user.getName() == null || user.getName().isBlank()) {
             user.setName(user.getLogin());
