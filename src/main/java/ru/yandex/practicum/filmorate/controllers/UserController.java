@@ -51,7 +51,12 @@ public class UserController {
         return new ArrayList<>(users.values());
     }
 
-    private void validateLogin(User user) {
+    public void clearUserController() {
+        counter = 1;
+        users.clear();
+    }
+
+    private void validateLogin(User user) throws ValidationException {
         if (user.getLogin().contains(" ")) {
             log.error("в логине обнаружены пробелы: {}", user.getLogin());
             throw new ValidationException("Логин должен быть без пробелов");
