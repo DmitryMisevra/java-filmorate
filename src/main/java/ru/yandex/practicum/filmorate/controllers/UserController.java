@@ -52,6 +52,7 @@ public class UserController {
         log.debug("Текущее количество пользователей: {}", users.size());
         return new ArrayList<>(users.values());
     }
+
     /* Очищает память контроллера. Сейчас используется для тестов */
     public void clearUserController() {
         counter = 1;
