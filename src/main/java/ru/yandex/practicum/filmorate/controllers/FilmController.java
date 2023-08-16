@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
+import ru.yandex.practicum.filmorate.util.FilmValidation;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +25,7 @@ public class FilmController {
     /* добавляет фильм */
     @PostMapping
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
-        validateReleaseDate(film);
+        FilmValidation.validateReleaseDate(film);
         film.setId(counter);
         films.put(counter, film);
         Film newFilm = films.get(counter);
@@ -39,7 +39,7 @@ public class FilmController {
     @PutMapping
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
         if (films.containsKey(film.getId())) {
-            validateReleaseDate(film);
+            FilmValidation.validateReleaseDate(film);
             films.put(film.getId(), film);
             log.debug("обновили фильм: {}", films.get(film.getId()));
             return films.get(film.getId());
@@ -55,19 +55,4 @@ public class FilmController {
         log.debug("Текущее количество фильмов: {}", films.size());
         return new ArrayList<>(films.values());
     }
-
-    /* Очищает память контроллера. Сейчас используется для тестов */
-    public void clearFilmController() {
-        counter = 1;
-        films.clear();
-    }
-
-    /* Вспомогательный метод. Валидирует дату релиза или выбрасывает исключение */
-    private void validateReleaseDate(Film film) throws ValidationException {
-        if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
-            log.error("Некорректная дата релиза: {}", film.getReleaseDate());
-            throw new ValidationException("Дата релиза не может быть ранее 28 декабря 1895 года");
-        }
-    }
-
 }
