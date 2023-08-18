@@ -21,7 +21,7 @@ public class UserController {
     /* добавляет юзера */
     @PostMapping
     public User addUser(@Valid @RequestBody User user) throws ValidationException {
-        validateLogin(user);
+        UserValidation.validateLogin(user);
         UserValidation.setDefaultName(user);
         user.setId(counter);
         users.put(counter, user);
@@ -36,7 +36,7 @@ public class UserController {
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) throws ValidationException {
         if (users.containsKey(user.getId())) {
-            validateLogin(user);
+            UserValidation.validateLogin(user);
             UserValidation.setDefaultName(user);
             users.put(user.getId(), user);
             log.debug("Обновили пользователя: {}", users.get(user.getId()));
@@ -52,13 +52,5 @@ public class UserController {
     public List<User> getUsersList() {
         log.debug("Текущее количество пользователей: {}", users.size());
         return new ArrayList<>(users.values());
-    }
-
-    /* Вспомогательный метод. Валидирует логины на отсутствие пробелов */
-    private void validateLogin(User user) throws ValidationException {
-        if (user.getLogin().contains(" ")) {
-            log.error("в логине обнаружены пробелы: {}", user.getLogin());
-            throw new ValidationException("Логин должен быть без пробелов");
-        }
     }
 }
