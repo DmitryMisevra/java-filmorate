@@ -20,6 +20,7 @@ public class UserService {
         this.userStorage = userStorage;
     }
 
+    /* сервис отвечает за добавление и удаление друзей, вывод списка взаимных друзей с другим юзером  */
 
 
     public User addFriend(Long id, Long friendId) {

@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class FilmService {
 
+    /* сервис отвечает за добавление и удаление лайков + вывод списка самых популярных фильмов  */
+
     private final FilmStorage filmStorage;
 
     private final UserStorage userStorage;

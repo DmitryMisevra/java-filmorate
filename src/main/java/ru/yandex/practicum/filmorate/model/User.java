@@ -20,5 +20,5 @@ public class User {
     private final String login;
     @PastOrPresent
     private final LocalDate birthday;
-    private Set<Long> userFriends = new HashSet<>();
+    private Set<Long> userFriends = new HashSet<>(); /* добавлен список друзей */
 }
