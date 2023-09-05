@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,34 +16,32 @@ import java.util.List;
 public class FilmController {
 
     private final FilmService filmService;
-    private final FilmStorage filmStorage;
 
-    public FilmController(FilmService filmService, FilmStorage filmStorage) {
+    public FilmController(FilmService filmService) {
         this.filmService = filmService;
-        this.filmStorage = filmStorage;
     }
 
     /* добавляет фильм */
     @PostMapping
     public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
-        return filmStorage.addFilm(film);
+        return filmService.addFilm(film);
     }
 
     /* обновляет фильм или выбрасывает исключение */
     @PutMapping
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
-        return filmStorage.updateFilm(film);
+        return filmService.updateFilm(film);
     }
 
     @GetMapping("/{id}")
     public Film findFilmById(@PathVariable Long id) {
-        return filmStorage.findFilmById(id);
+        return filmService.findFilmById(id);
     }
 
     /* возвращает список сохраненных фильмов */
     @GetMapping
     public List<Film> getFilmsList() {
-        return filmStorage.getFilmsList();
+        return filmService.getFilmsList();
     }
 
     @PutMapping("/{id}/like/{userId}")
