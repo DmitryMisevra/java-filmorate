@@ -31,32 +31,37 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    /* обновляет список сохраненных юзеров */
+    /* возвращает список сохраненных юзеров */
     @GetMapping
     public List<User> findUsersList() {
         return userService.findUsersList();
     }
 
+    /* находит юзера по id */
     @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) {
         return userService.findUserById(id);
     }
 
+    /* добавляет в друзья юзера по id */
     @PutMapping("/{id}/friends/{friendId}")
     public User addFriend(@PathVariable Long id, @PathVariable Long friendId) {
         return userService.addFriend(id, friendId);
     }
 
+    /* удаляет из друзей юзера по id */
     @DeleteMapping("/{id}/friends/{friendId}")
     public User removeFriend(@PathVariable Long id, @PathVariable Long friendId) {
         return userService.removeFriend(id, friendId);
     }
 
+    /* возвращает список друзей юзера */
     @GetMapping("/{id}/friends")
     public List<User> findUserFriendList(@PathVariable Long id) {
         return userService.findUserFriendList(id);
     }
 
+    /* возвращает список общих друзей */
     @GetMapping("/{id}/friends/common/{otherId}")
     public List<User> findMutualFriends(@PathVariable Long id, @PathVariable Long otherId) {
         return userService.findMutualFriends(id, otherId);

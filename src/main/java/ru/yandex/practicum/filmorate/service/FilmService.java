@@ -24,6 +24,7 @@ public class FilmService {
         this.userStorage = userStorage;
     }
 
+    /* добавляет лайк фильму */
     public Film addLike(Long id, Long userId) {
         Film film = filmStorage.findFilmById(id);
         User user = userStorage.findUserById(userId);
@@ -35,6 +36,7 @@ public class FilmService {
         return filmStorage.findFilmById(film.getId());
     }
 
+    /* удаляет лайк у фильма */
     public Film removeLike(Long id, Long userId) {
         Film film = filmStorage.findFilmById(id);
         User user = userStorage.findUserById(userId);
@@ -46,6 +48,7 @@ public class FilmService {
         return filmStorage.findFilmById(id);
     }
 
+    /* удаляет лайк к фильму */
     public List<Film> findPopularFilms(Long count) {
         return filmStorage.getFilmsList().stream()
                 .sorted((Film film1, Film film2) -> Integer.compare(film2.getUserLikes().size(),
@@ -54,6 +57,7 @@ public class FilmService {
                 .collect(Collectors.toList());
     }
 
+    /* ниже добавлены сквозные методы, которые вызывают одноименные методы из Filmtorage */
     public Film addFilm(Film film) {
         return filmStorage.addFilm(film);
     }

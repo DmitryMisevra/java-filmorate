@@ -23,16 +23,17 @@ public class FilmController {
 
     /* добавляет фильм */
     @PostMapping
-    public Film addFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film addFilm(@Valid @RequestBody Film film) {
         return filmService.addFilm(film);
     }
 
     /* обновляет фильм или выбрасывает исключение */
     @PutMapping
-    public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
+    public Film updateFilm(@Valid @RequestBody Film film) {
         return filmService.updateFilm(film);
     }
 
+    /* находит фильм по id */
     @GetMapping("/{id}")
     public Film findFilmById(@PathVariable Long id) {
         return filmService.findFilmById(id);
@@ -44,20 +45,22 @@ public class FilmController {
         return filmService.getFilmsList();
     }
 
+    /* добавляет лайк к фильму */
     @PutMapping("/{id}/like/{userId}")
     public Film addLike(@PathVariable Long id, @PathVariable Long userId) {
         return filmService.addLike(id, userId);
     }
 
+    /* удаляет лайк к фильму */
     @DeleteMapping("/{id}/like/{userId}")
     public Film removeLike(@PathVariable Long id, @PathVariable Long userId) {
         return filmService.removeLike(id, userId);
     }
 
+    /* возвращает список самых популярных фильмов. Если не передано собственное значение, по умолчанию список
+    ограничен 10 фильмами */
     @GetMapping("/popular")
     public List<Film> findPopularFilms(@RequestParam(defaultValue = "10") Long count) {
         return filmService.findPopularFilms(count);
     }
-
-
 }

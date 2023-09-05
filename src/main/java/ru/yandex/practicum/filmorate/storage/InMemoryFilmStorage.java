@@ -13,6 +13,8 @@ import java.util.Map;
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
 
+    /* InMemoryFilmStorage хранит данные о фильмах в оперативной памяти */
+
     private Long counter = 1L; /* счетчик id */
     private final Map<Long, Film> films = new HashMap<>(); /* мапа, где хранятся фильмы. id - ключ */
 
