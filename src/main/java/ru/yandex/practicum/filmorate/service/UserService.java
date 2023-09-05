@@ -69,4 +69,24 @@ public class UserService {
         return mutualFriends.stream().map(userStorage::findUserById).collect(Collectors.toList());
     }
 
+    public User addUser(User user) {
+        return userStorage.addUser(user);
+    }
+
+    public User updateUser(User user) {
+        return userStorage.updateUser(user);
+    }
+
+    public List<User> findUsersList() {
+        return userStorage.findUsersList();
+    }
+
+    public List<User> findUserFriendList(Long id) {
+        return userStorage.findUserFriendList(id);
+    }
+
+    public User findUserById(Long id) {
+        return userStorage.findUserById(id);
+    }
+
 }

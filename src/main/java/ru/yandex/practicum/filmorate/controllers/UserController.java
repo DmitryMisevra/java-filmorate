@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
-import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -16,34 +15,31 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
-    private final UserStorage userStorage;
-
-    public UserController(UserService userService, UserStorage userStorage) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userStorage = userStorage;
     }
 
     /* добавляет юзера */
     @PostMapping
     public User addUser(@Valid @RequestBody User user) {
-        return userStorage.addUser(user);
+        return userService.addUser(user);
     }
 
     /* обновляет юзера либо выбрасывает исключение */
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) {
-        return userStorage.updateUser(user);
+        return userService.updateUser(user);
     }
 
     /* обновляет список сохраненных юзеров */
     @GetMapping
     public List<User> findUsersList() {
-        return userStorage.findUsersList();
+        return userService.findUsersList();
     }
 
     @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) {
-        return userStorage.findUserById(id);
+        return userService.findUserById(id);
     }
 
     @PutMapping("/{id}/friends/{friendId}")
@@ -58,7 +54,7 @@ public class UserController {
 
     @GetMapping("/{id}/friends")
     public List<User> findMutualFriends(@PathVariable Long id) {
-        return userStorage.findUserFriendList(id);
+        return userService.findUserFriendList(id);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
