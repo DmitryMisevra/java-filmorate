@@ -85,7 +85,7 @@ class UserControllerTest {
                 + "\"name\": \"Nick Name\","
                 + "\"email\": \"mail@mail.ru\","
                 + "\"login\": \"dolore\","
-                + "\"birthday\": \"2023-09-20\""
+                + "\"birthday\": \"2025-09-20\""
                 + "}";
 
 
