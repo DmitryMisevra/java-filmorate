@@ -6,8 +6,10 @@ import lombok.Getter;
 @Getter
 public class Genre {
 
-    private final long genreId;
-    private final String genreName;
+    /* Genre хранит информацию о жанре */
+
+    private final long id;
+    private String name;
 
 
     public Genre(long genreId, String genreName) {

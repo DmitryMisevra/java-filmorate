@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Builder
 public class Film {
 
+    /* фильм хранит данные о фильме */
+
     private long id;
     @NotBlank
     private final String name;

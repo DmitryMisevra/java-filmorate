@@ -14,6 +14,8 @@ import java.util.*;
 @Slf4j
 public class UserController {
 
+    /* UserController отвечает за обработку эндпойнтов по добавлению, обновлению юзеров и друзей */
+
     private final UserService userService;
 
     public UserController(UserService userService) {

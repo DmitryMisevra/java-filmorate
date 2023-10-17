@@ -12,7 +12,9 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class User {
-    @NotNull
+
+    /* User хранит данные о пользователе */
+
     private long id;
     private String name;
     @Email

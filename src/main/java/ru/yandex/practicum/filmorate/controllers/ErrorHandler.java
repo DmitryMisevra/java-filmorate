@@ -13,6 +13,8 @@ import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 @RestControllerAdvice
 public class ErrorHandler {
 
+    /* класс отвечает за обработку ошибок */
+
     @ExceptionHandler({ValidationException.class, MethodArgumentNotValidException.class,
             HttpMessageNotReadableException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)

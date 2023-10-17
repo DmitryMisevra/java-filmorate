@@ -7,9 +7,11 @@ import lombok.Setter;
 @Setter
 public class Friendship {
 
-    private final String friend1Id;
-    private final String friend2Id;
-    private FriendshipStatus friendshipStatus;
+    /* Friendship отвечает за хранение статусов дружбы между двумя пользователями */
+
+    private final long user1Id;
+    private final long user2Id;
+    private boolean isConfirmed;
 
     public Friendship(String friend1Id, String friend2Id, FriendshipStatus frienshipStatus) {
         this.friend1Id = friend1Id;
