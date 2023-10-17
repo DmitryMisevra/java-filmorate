@@ -5,6 +5,9 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,8 +24,12 @@ public class Film {
     private final LocalDate releaseDate;
     @Positive
     private final int duration;
-    @NotNull
-    private final long genreid;
-    @NotNull
-    private final long ratingid;
+    private final Mpa mpa;
+    private Long rate;
+
+    @Builder.Default
+    private Set<Genre> genres = new LinkedHashSet<>();
+
+    @Builder.Default
+    private Set<Long> userLikes = new HashSet<>();
 }
