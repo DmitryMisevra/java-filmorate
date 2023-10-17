@@ -35,7 +35,7 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public Film addFilm(Film film) {
         FilmValidation.validateReleaseDate(film);
-        String filmSql ="insert into PUBLIC.FILM (FILM_NAME, FILM_RELEASE_DATE, FILM_DESCRIPTION, " +
+        String filmSql = "insert into PUBLIC.FILM (FILM_NAME, FILM_RELEASE_DATE, FILM_DESCRIPTION, " +
                 "FILM_DURATION, MPA_ID) values (?, ?, ?, ?, ?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
@@ -57,7 +57,7 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public Film updateFilm(Film film) {
         FilmValidation.validateReleaseDate(film);
-        String sql ="update PUBLIC.FILM set FILM_NAME = ?, FILM_RELEASE_DATE = ?, FILM_DESCRIPTION = ?, " +
+        String sql = "update PUBLIC.FILM set FILM_NAME = ?, FILM_RELEASE_DATE = ?, FILM_DESCRIPTION = ?, " +
                 "FILM_DURATION = ?, MPA_ID = ? where FILM_ID = ?";
         jdbcTemplate.update(sql, film.getName(), film.getReleaseDate(), film.getDescription(),
                 film.getDuration(), film.getMpa().getId(), film.getId());
@@ -69,7 +69,7 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public Film findFilmById(long id) {
         try {
-            String sql ="select * from PUBLIC.FILM where FILM_ID = ?";
+            String sql = "select * from PUBLIC.FILM where FILM_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToFilm, id);
         } catch (EmptyResultDataAccessException e) {
             throw new FilmNotFoundException("Такого фильма нет в системе");
@@ -78,20 +78,20 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public List<Film> getFilmsList() {
-        String sql ="select * from PUBLIC.FILM";
+        String sql = "select * from PUBLIC.FILM";
         return jdbcTemplate.query(sql, this::mapRowToFilm);
     }
 
     @Override
     public List<Genre> getGenresList() {
-        String sql ="select * from PUBLIC.GENRE";
+        String sql = "select * from PUBLIC.GENRE";
         return jdbcTemplate.query(sql, this::mapRowToGenre);
     }
 
     @Override
     public Genre findGenreByid(long id) {
         try {
-            String sql ="select * from PUBLIC.GENRE where GENRE_ID = ?";
+            String sql = "select * from PUBLIC.GENRE where GENRE_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToGenre, id);
         } catch (EmptyResultDataAccessException e) {
             throw new GenreNotFoundException("Такого жанра нет в системе");
@@ -100,14 +100,14 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public List<Mpa> getMpaList() {
-        String sql ="select * from PUBLIC.MPA";
+        String sql = "select * from PUBLIC.MPA";
         return jdbcTemplate.query(sql, this::mapRowToMpa);
     }
 
     @Override
     public Mpa findMpaByid(long id) {
         try {
-            String sql ="select * from PUBLIC.MPA where MPA_ID = ?";
+            String sql = "select * from PUBLIC.MPA where MPA_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToMpa, id);
         } catch (EmptyResultDataAccessException e) {
             throw new MpaNotFoundException("Такого рейтинга нет в системе");
@@ -181,7 +181,7 @@ public class FilmDbStorage implements FilmStorage {
 
     /* Вспомогательный метод. Возвращает список лайков от юзеров по конкретному фильму */
     private Set<Long> findUserLikesList(Film film) {
-        String sql ="select USER_ID from PUBLIC.LIKES where FILM_ID = ?";
+        String sql = "select USER_ID from PUBLIC.LIKES where FILM_ID = ?";
         List<Long> longList = jdbcTemplate.queryForList(sql, Long.class, film.getId());
         return new HashSet<>(longList);
     }
