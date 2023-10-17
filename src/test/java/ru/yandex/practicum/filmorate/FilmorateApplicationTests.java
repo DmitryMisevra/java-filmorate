@@ -192,7 +192,7 @@ class FilmorateApplicationTests {
     }
 
     @Test
-    public void TestFindUserFriendList() {
+    public void testFindUserFriendList() {
         User userOne = User.builder()
                 .name("dolore")
                 .email("mail@mail.ru")
