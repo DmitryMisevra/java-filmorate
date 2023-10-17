@@ -13,9 +13,10 @@ public class Friendship {
     private final long user2Id;
     private boolean isConfirmed;
 
-    public Friendship(String friend1Id, String friend2Id, FriendshipStatus frienshipStatus) {
-        this.friend1Id = friend1Id;
-        this.friend2Id = friend2Id;
-        this.friendshipStatus = frienshipStatus;
+
+    public Friendship(long user1Id, long user2Id, boolean isConfirmed) {
+        this.user1Id = user1Id;
+        this.user2Id = user2Id;
+        this.isConfirmed = isConfirmed;
     }
 }
