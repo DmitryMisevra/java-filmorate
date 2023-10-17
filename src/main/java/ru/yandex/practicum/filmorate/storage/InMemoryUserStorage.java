@@ -3,13 +3,11 @@ package ru.yandex.practicum.filmorate.storage;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
+import ru.yandex.practicum.filmorate.model.Friendship;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.util.UserValidation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -62,5 +60,21 @@ public class InMemoryUserStorage implements UserStorage {
         } else {
             throw new UserNotFoundException("Такого пользователя нет в системе");
         }
+    }
+
+    /* добавлены заглушки на неиспользуемые методы */
+
+    @Override
+    public Friendship findFriendship(long user1Id, long user2Id) {
+        return null;
+    }
+
+    @Override
+    public Friendship updateFriendship(Friendship friendship) {
+        return null;
+    }
+
+    @Override
+    public void removeFriendship(Friendship friendship) {
     }
 }
