@@ -23,31 +23,36 @@ public class UserService {
     /* сервис отвечает за добавление и удаление друзей, вывод списка взаимных друзей с другим юзером  */
 
 
-    public User addFriend(Long id, Long friendId) {
-        User user = userStorage.findUserById(id);
-        User newFriendUser = userStorage.findUserById(friendId);
-
-        Set<Long> userFriends = user.getUserFriends();
-        userFriends.add(newFriendUser.getId());
-        user.setUserFriends(userFriends);
-        userStorage.updateUser(user);
-
-        Set<Long> newFriendUserFriends = newFriendUser.getUserFriends();
-        newFriendUserFriends.add(user.getId());
-        newFriendUser.setUserFriends(newFriendUserFriends);
-        userStorage.updateUser(newFriendUser);
+    /* добавляет друга */
+    public User addFriend(long id, long friendId) {
+        if (id == friendId) {
+            throw new ValidationException("id пользователей не могут быть одинаковыми");
+        }
+        userStorage.findUserById(friendId);
+        Friendship friendship = userStorage.findFriendship(id, friendId);
+        if (friendship != null) {
+            if (friendship.isConfirmed()) {
+                throw new ValidationException("Пользователи уже являются друзьями");
+            } else if (friendship.getUser2Id() == friendId) {
+                friendship.setConfirmed(true);
+                userStorage.updateFriendship(friendship);
+            } else {
+                throw new ValidationException("Запрос уже был отправлен ранее");
+            }
+        } else {
+            friendship = new Friendship(friendId, id, false);
+            userStorage.updateFriendship(friendship);
+        }
 
         return userStorage.findUserById(id);
     }
 
-    public User removeFriend(Long id, Long friendId) {
-        User user = userStorage.findUserById(id);
-        User removedUser = userStorage.findUserById(friendId);
-
-        Set<Long> userFriends = user.getUserFriends();
-        userFriends.remove(removedUser.getId());
-        user.setUserFriends(userFriends);
-        userStorage.updateUser(user);
+    /* удаляет друга */
+    public User removeFriend(long id, long friendId) {
+        if (id == friendId) {
+            throw new ValidationException("id пользователей не могут быть одинаковыми");
+        }
+        userStorage.findUserById(friendId);
 
         Set<Long> removedFriendUserFriends = removedUser.getUserFriends();
         removedFriendUserFriends.add(user.getId());
@@ -57,6 +62,7 @@ public class UserService {
         return userStorage.findUserById(id);
     }
 
+    /* находит общих друзей */
     public List<User> findMutualFriends(Long id, Long friendId) {
         User userOne = userStorage.findUserById(id);
         User userTwo = userStorage.findUserById(friendId);
@@ -69,6 +75,7 @@ public class UserService {
         return mutualFriends.stream().map(userStorage::findUserById).collect(Collectors.toList());
     }
 
+    /* ниже сквозные методы UserStorage */
     public User addUser(User user) {
         return userStorage.addUser(user);
     }
