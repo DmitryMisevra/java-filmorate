@@ -2,6 +2,8 @@ package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Genre;
+import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
@@ -72,5 +74,21 @@ public class FilmService {
 
     public List<Film> getFilmsList() {
         return filmStorage.getFilmsList();
+    }
+
+    public List<Genre> getGenresList() {
+        return filmStorage.getGenresList();
+    }
+
+    public Genre findGenreByid(long id) {
+        return filmStorage.findGenreByid(id);
+    }
+
+    public List<Mpa> getMpaList() {
+        return filmStorage.getMpaList();
+    }
+
+    public Mpa findMpaByid(long id) {
+        return filmStorage.findMpaByid(id);
     }
 }
