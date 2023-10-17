@@ -6,7 +6,7 @@ import ru.yandex.practicum.filmorate.model.User;
 public class UserValidation {
 
     /* Вспомогательный метод. Валидирует логины на отсутствие пробелов */
-    public static void validateLogin(User user) throws ValidationException {
+    public static void validateLogin(User user) {
         if (user.getLogin().contains(" ")) {
             throw new ValidationException("Логин должен быть без пробелов");
         }

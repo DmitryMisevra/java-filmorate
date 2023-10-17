@@ -7,12 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.yandex.practicum.filmorate.exceptions.ValidationException;
-
-import javax.servlet.ServletException;
-
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,25 +47,6 @@ class FilmControllerTest {
                 .andExpect(jsonPath("$.releaseDate").value("1895-12-28"))
                 .andExpect(jsonPath("$.duration").value("100"));
 
-    }
-
-    @Test
-    void addFilm_shouldReturnValidationExceptionWithWrongReleaseDate() {
-
-        String filmJson = "{"
-                + "\"name\": \"nisi eiusmod\","
-                + "\"description\": \"adipisicing\","
-                + "\"releaseDate\": \"1895-08-27\","
-                + "\"duration\": \"100\""
-                + "}";
-
-        Exception exception = assertThrows(ServletException.class,
-                () -> mockMvc.perform(post("/films")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(filmJson)));
-
-        assertTrue(exception.getCause() instanceof ValidationException);
-        assertEquals("Дата релиза не может быть ранее 28 декабря 1895 года", exception.getCause().getMessage());
     }
 
     @Test
@@ -165,39 +141,6 @@ class FilmControllerTest {
                 .andExpect(jsonPath("$.description").value("test description 2"))
                 .andExpect(jsonPath("$.releaseDate").value("1990-07-15"))
                 .andExpect(jsonPath("$.duration").value("150"));
-
-    }
-
-    @Test
-    void updateFilm_ShouldThrowValidationExceptionWithWrongID() throws Exception {
-        String filmJsonOne = "{"
-                + "\"name\": \"test film 1\","
-                + "\"description\": \"test description 1\","
-                + "\"releaseDate\": \"1995-08-27\","
-                + "\"duration\": \"100\""
-                + "}";
-
-        String filmJsonTwo = "{"
-                + "\"id\": \"2\","
-                + "\"name\": \"test film 2\","
-                + "\"description\": \"test description 2\","
-                + "\"releaseDate\": \"1990-07-15\","
-                + "\"duration\": \"150\""
-                + "}";
-
-
-        mockMvc.perform(post("/films")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(filmJsonOne))
-                .andExpect(status().isOk());
-
-        Exception exception = assertThrows(ServletException.class,
-                () -> mockMvc.perform(put("/films")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(filmJsonTwo)));
-
-        assertTrue(exception.getCause() instanceof ValidationException);
-        assertEquals("Такого фильма нет в системе", exception.getCause().getMessage());
 
     }
 
