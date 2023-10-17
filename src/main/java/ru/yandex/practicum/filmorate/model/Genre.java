@@ -18,8 +18,12 @@ public class Genre {
     private String name;
 
 
-    public Genre(long genreId, String genreName) {
-        this.genreId = genreId;
-        this.genreName = genreName;
+    public Genre(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Genre(long id) {
+        this.id = id;
     }
 }
