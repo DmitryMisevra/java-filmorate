@@ -54,11 +54,12 @@ public class UserService {
         }
         userStorage.findUserById(friendId);
 
-        Set<Long> removedFriendUserFriends = removedUser.getUserFriends();
-        removedFriendUserFriends.add(user.getId());
-        removedUser.setUserFriends(removedFriendUserFriends);
-        userStorage.updateUser(removedUser);
-
+        Friendship friendship = userStorage.findFriendship(id, friendId);
+        if (friendship != null) {
+            userStorage.removeFriendship(friendship);
+        } else {
+            throw new ValidationException("Пользователи не являются друзьями");
+        }
         return userStorage.findUserById(id);
     }
 
