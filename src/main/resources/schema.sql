@@ -1,6 +1,6 @@
-create table PUBLIC.FILM_USER
+create table if not exists FILM_USER
 (
-    USER_ID       INTEGER                not null,
+    USER_ID       INTEGER auto_increment,
     USER_NAME     CHARACTER VARYING(50)  not null,
     USER_EMAIL    CHARACTER VARYING(100) not null,
     USER_LOGIN    CHARACTER VARYING(100) not null,
@@ -9,29 +9,20 @@ create table PUBLIC.FILM_USER
         primary key (USER_ID)
 );
 
-create table PUBLIC.FRIENDSHIP_STATUS
+create table if not exists FRIENDSHIP
 (
-    STATUS_ID   INTEGER not null,
-    STATUS_NAME CHARACTER VARYING(50),
-    constraint "FRIENDSHIP_STATUS_pk"
-        primary key (STATUS_ID)
-);
-
-create table PUBLIC.FRIENDSHIP
-(
-    FRIENDSHIP_ID INTEGER auto_increment,
-    FRIEND_1_ID   INTEGER not null,
-    FRIEND_2_ID   INTEGER not null,
-    STATUS_ID     INTEGER not null,
+    USER_1_ID    INTEGER not null,
+    USER_2_ID    INTEGER not null,
+    IS_CONFIRMED BOOLEAN not null,
+    constraint "FRIENDSHIP_pk"
+        primary key (USER_1_ID, USER_2_ID),
     constraint "FRIENDSHIP_FILM_USER_USER_ID_fk"
-        foreign key (FRIEND_1_ID) references PUBLIC.FILM_USER,
-    constraint "FRIENDSHIP_FILM_USER_USER_ID_fk2"
-        foreign key (FRIEND_2_ID) references PUBLIC.FILM_USER,
-    constraint "FRIENDSHIP_FRIENDSHIP_STATUS_STATUS_ID_fk"
-        foreign key (STATUS_ID) references PUBLIC.FRIENDSHIP_STATUS
+        foreign key (USER_2_ID) references FILM_USER,
+    constraint "FRIEND_REQUEST_FILM_USER_USER_ID_fk"
+        foreign key (USER_1_ID) references FILM_USER
 );
 
-create table PUBLIC.GENRE
+create table if not exists GENRE
 (
     GENRE_ID   INTEGER auto_increment,
     GENRE_NAME CHARACTER VARYING(50) not null,
@@ -39,38 +30,50 @@ create table PUBLIC.GENRE
         primary key (GENRE_ID)
 );
 
-create table PUBLIC.RATING
+create table if not exists MPA
 (
-    RATING_ID   INTEGER auto_increment,
-    RATING_NAME CHARACTER VARYING(50) not null,
+    MPA_ID   INTEGER auto_increment,
+    MPA_NAME CHARACTER VARYING(50) not null,
     constraint "RATING_pk"
-        primary key (RATING_ID)
+        primary key (MPA_ID)
 );
 
-create table PUBLIC.FILM
+create table if not exists FILM
 (
     FILM_ID           INTEGER auto_increment,
     FILM_NAME         CHARACTER VARYING(100) not null,
     FILM_RELEASE_DATE DATE                   not null,
-    FILM_DESCRIPTION  CHARACTER VARYING(255) not null,
+    FILM_DESCRIPTION  CHARACTER VARYING(200) not null,
     FILM_DURATION     INTEGER                not null,
-    GENRE_ID          INTEGER                not null,
-    RATING_ID         INTEGER                not null,
+    MPA_ID            INTEGER                not null,
     constraint FILM_PK
         primary key (FILM_ID),
-    constraint "FILM_GENRE_GENRE_ID_fk"
-        foreign key (GENRE_ID) references PUBLIC.GENRE,
-    constraint "FILM_RATING_RATING_ID_fk"
-        foreign key (RATING_ID) references PUBLIC.RATING
+    constraint "FILM_MPA_MPA_ID_fk"
+        foreign key (MPA_ID) references MPA
 );
 
-create table PUBLIC.FILM_LIKES
+create table if not exists FILM_GENRES
 (
-    LIKE_ID INTEGER auto_increment,
+    FILM_ID  INTEGER not null,
+    GENRE_ID INTEGER not null,
+    constraint "FILM_GENRES_pk"
+        primary key (FILM_ID, GENRE_ID),
+    constraint "FILM_GENRES_FILM_FILM_ID_fk"
+        foreign key (FILM_ID) references FILM,
+    constraint "FILM_GENRES_GENRE_GENRE_ID_fk"
+        foreign key (GENRE_ID) references GENRE
+);
+
+create table if not exists LIKES
+(
     FILM_ID INTEGER not null,
     USER_ID INTEGER not null,
+    constraint "LIKES_pk"
+        primary key (FILM_ID, USER_ID),
     constraint "FILM_LIKES_FILM_FILM_ID_fk"
-        foreign key (FILM_ID) references PUBLIC.FILM,
+        foreign key (FILM_ID) references FILM,
     constraint "FILM_LIKES_FILM_USER_USER_ID_fk"
-        foreign key (USER_ID) references PUBLIC.FILM_USER
+        foreign key (USER_ID) references FILM_USER
 );
+
+
