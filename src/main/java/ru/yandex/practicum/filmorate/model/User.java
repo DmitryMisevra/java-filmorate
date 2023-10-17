@@ -23,4 +23,7 @@ public class User {
     private final String login;
     @PastOrPresent
     private final LocalDate birthday;
+
+    @Builder.Default
+    private Set<Long> userFriends = new HashSet<>(); /* список друзей */
 }
