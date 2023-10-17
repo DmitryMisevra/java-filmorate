@@ -1,8 +1,10 @@
 package ru.yandex.practicum.filmorate.storage;
 
+import ru.yandex.practicum.filmorate.model.Friendship;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserStorage {
 
@@ -19,11 +21,17 @@ public interface UserStorage {
     List<User> findUsersList();
 
     /* возвращает список друзей юзера */
-    List<User> findUserFriendList(Long id);
+    List<User> findUserFriendList(long id);
 
     /* находит юзера по id */
-    User findUserById(Long id);
+    User findUserById(long id);
 
+    /* возвращает статус дружбы между двумя пользователями. Используется в сервисном слое */
+    Friendship findFriendship(long user1Id, long user2Id);
 
+    /* обновляет статус дружбы между пользователями. Используется в сервисном слое */
+    Friendship updateFriendship(Friendship friendship);
 
+    /* удаляет дружбу между пользователями. Используется в сервисном слое */
+    void removeFriendship(Friendship friendship);
 }
