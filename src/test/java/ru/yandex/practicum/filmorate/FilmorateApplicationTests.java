@@ -1,12 +1,11 @@
 package ru.yandex.practicum.filmorate;
 
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.yandex.practicum.filmorate.exceptions.*;
 import ru.yandex.practicum.filmorate.model.*;
 import ru.yandex.practicum.filmorate.service.UserService;
@@ -25,47 +24,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class FilmorateApplicationTests {
 
     private final UserDbStorage userStorage;
     private final UserService userService;
-
     private final FilmDbStorage filmStorage;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-
-    @BeforeEach
-    public void deleteAndResetTables() {
-        jdbcTemplate.execute("delete from FILM_GENRES;");
-        jdbcTemplate.execute("delete from FRIENDSHIP;");
-        jdbcTemplate.execute("delete from LIKES;");
-        jdbcTemplate.execute("delete from FILM;");
-        jdbcTemplate.execute("delete from MPA;");
-        jdbcTemplate.execute("delete from GENRE;");
-        jdbcTemplate.execute("delete from FILM_USER;");
-
-        jdbcTemplate.execute("alter table PUBLIC.FILM_USER alter column USER_ID restart with 1;");
-        jdbcTemplate.execute("alter table PUBLIC.FILM alter column FILM_ID restart with 1;");
-        jdbcTemplate.execute("alter table PUBLIC.GENRE alter column GENRE_ID restart with 1;");
-        jdbcTemplate.execute("alter table PUBLIC.MPA alter column MPA_ID restart with 1;");
-
-
-        jdbcTemplate.execute("insert into PUBLIC.MPA (MPA_NAME) values ('G');");
-        jdbcTemplate.execute("insert into PUBLIC.MPA (MPA_NAME) values ('PG');");
-        jdbcTemplate.execute("insert into PUBLIC.MPA (MPA_NAME) values ('PG-13');");
-        jdbcTemplate.execute("insert into PUBLIC.MPA (MPA_NAME) values ('R');");
-        jdbcTemplate.execute("insert into PUBLIC.MPA (MPA_NAME) values ('NC-17');");
-
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Комедия');");
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Драма');");
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Мультфильм');");
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Триллер');");
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Документальный');");
-        jdbcTemplate.execute("insert into PUBLIC.GENRE (GENRE_NAME) values ('Боевик');");
-    }
-
 
     @Test
     public void testAddUser() {
