@@ -34,7 +34,7 @@ public class FilmController {
 
     /* находит фильм по id */
     @GetMapping("/{id}")
-    public Film findFilmById(@PathVariable Long id) {
+    public Film findFilmById(@PathVariable long id) {
         return filmService.findFilmById(id);
     }
 
@@ -46,13 +46,13 @@ public class FilmController {
 
     /* добавляет лайк к фильму */
     @PutMapping("/{id}/like/{userId}")
-    public Film addLike(@PathVariable Long id, @PathVariable Long userId) {
+    public Film addLike(@PathVariable long id, @PathVariable long userId) {
         return filmService.addLike(id, userId);
     }
 
     /* удаляет лайк к фильму */
     @DeleteMapping("/{id}/like/{userId}")
-    public Film removeLike(@PathVariable Long id, @PathVariable Long userId) {
+    public Film removeLike(@PathVariable long id, @PathVariable long userId) {
         return filmService.removeLike(id, userId);
     }
 

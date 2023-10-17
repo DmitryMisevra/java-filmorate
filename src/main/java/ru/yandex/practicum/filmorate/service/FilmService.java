@@ -25,7 +25,7 @@ public class FilmService {
     }
 
     /* добавляет лайк фильму */
-    public Film addLike(Long id, Long userId) {
+    public Film addLike(long id, long userId) {
         Film film = filmStorage.findFilmById(id);
         User user = userStorage.findUserById(userId);
 
@@ -37,7 +37,7 @@ public class FilmService {
     }
 
     /* удаляет лайк у фильма */
-    public Film removeLike(Long id, Long userId) {
+    public Film removeLike(long id, long userId) {
         Film film = filmStorage.findFilmById(id);
         User user = userStorage.findUserById(userId);
 
@@ -49,7 +49,7 @@ public class FilmService {
     }
 
     /* удаляет лайк к фильму */
-    public List<Film> findPopularFilms(Long count) {
+    public List<Film> findPopularFilms(long count) {
         return filmStorage.getFilmsList().stream()
                 .sorted((Film film1, Film film2) -> Integer.compare(film2.getUserLikes().size(),
                         film1.getUserLikes().size()))

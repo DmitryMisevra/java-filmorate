@@ -42,31 +42,31 @@ public class UserController {
 
     /* находит юзера по id */
     @GetMapping("/{id}")
-    public User findUserById(@PathVariable Long id) {
+    public User findUserById(@PathVariable long id) {
         return userService.findUserById(id);
     }
 
     /* добавляет в друзья юзера по id */
     @PutMapping("/{id}/friends/{friendId}")
-    public User addFriend(@PathVariable Long id, @PathVariable Long friendId) {
+    public User addFriend(@PathVariable long id, @PathVariable long friendId) {
         return userService.addFriend(id, friendId);
     }
 
     /* удаляет из друзей юзера по id */
     @DeleteMapping("/{id}/friends/{friendId}")
-    public User removeFriend(@PathVariable Long id, @PathVariable Long friendId) {
+    public User removeFriend(@PathVariable long id, @PathVariable long friendId) {
         return userService.removeFriend(id, friendId);
     }
 
     /* возвращает список друзей юзера */
     @GetMapping("/{id}/friends")
-    public List<User> findUserFriendList(@PathVariable Long id) {
+    public List<User> findUserFriendList(@PathVariable long id) {
         return userService.findUserFriendList(id);
     }
 
     /* возвращает список общих друзей */
     @GetMapping("/{id}/friends/common/{otherId}")
-    public List<User> findMutualFriends(@PathVariable Long id, @PathVariable Long otherId) {
+    public List<User> findMutualFriends(@PathVariable long id, @PathVariable long otherId) {
         return userService.findMutualFriends(id, otherId);
     }
 }

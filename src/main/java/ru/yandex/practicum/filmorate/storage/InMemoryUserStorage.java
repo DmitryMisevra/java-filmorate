@@ -49,14 +49,14 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public List<User> findUserFriendList(Long id) {
+    public List<User> findUserFriendList(long id) {
         return findUserById(id).getUserFriends().stream()
                 .map(this::findUserById)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User findUserById(long id) {
         if (users.containsKey(id)) {
             return users.get(id);
         } else {
