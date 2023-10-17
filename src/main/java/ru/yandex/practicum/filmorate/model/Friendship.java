@@ -1,10 +1,14 @@
 package ru.yandex.practicum.filmorate.model;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@EqualsAndHashCode
 public class Friendship {
 
     /* Friendship отвечает за хранение статусов дружбы между двумя пользователями */
