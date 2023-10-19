@@ -3,12 +3,10 @@ package ru.yandex.practicum.filmorate.model;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 /* Mpa отвечает за хранение данных об id и имени рейтинга */
 
 @Getter
-@Setter
 @EqualsAndHashCode
 @Builder
 public class Mpa {

@@ -4,12 +4,10 @@ package ru.yandex.practicum.filmorate.model;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 /* Genre отвечает за хранение информации о жанре */
 
 @Getter
-@Setter
 @EqualsAndHashCode
 @Builder
 public class Genre {
