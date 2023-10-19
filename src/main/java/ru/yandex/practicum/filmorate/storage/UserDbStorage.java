@@ -133,8 +133,7 @@ public class UserDbStorage implements UserStorage {
 
     /* Вспомогательный метод. Возвращает список id друзей пользователя. */
     private Set<Long> getFriendsLongList(long id) {
-        String sql = "select * from PUBLIC.FRIENDSHIP where USER_2_ID = ? or (USER_1_ID = ? and" +
-                " IS_CONFIRMED = true);";
+        String sql = "select * from PUBLIC.FRIENDSHIP where USER_2_ID = ? or (USER_1_ID = ? and IS_CONFIRMED = true);";
         List<Friendship> friendships = jdbcTemplate.query(sql, this::mapRowToFriendship, id, id);
         List<Long> longList = new ArrayList<>();
         for (Friendship friendship : friendships) {
@@ -145,5 +144,9 @@ public class UserDbStorage implements UserStorage {
             }
         }
         return new HashSet<>(longList);
+
+        return friendships.stream()
+                .map(friendship -> (friendship.getUser1Id() == id) ? friendship.getUser2Id() : friendship.getUser1Id())
+                .collect(Collectors.toSet());
     }
 }
