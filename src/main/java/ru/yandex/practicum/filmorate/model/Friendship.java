@@ -8,13 +8,14 @@ import lombok.Setter;
 /* Friendship отвечает за хранение статусов дружбы между двумя пользователями */
 
 @Getter
-@Setter
 @Builder
 @EqualsAndHashCode
 public class Friendship {
 
     private final long user1Id;
     private final long user2Id;
+
+    @Setter
     private boolean isConfirmed;
 
 
