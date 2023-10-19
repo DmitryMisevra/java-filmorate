@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.storage;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
+import ru.yandex.practicum.filmorate.model.Friendship;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.util.UserValidation;
 
@@ -12,10 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/* InMemoryUserStorage отвечает ха хранение данных о пользователях в оперативной памяти */
+
 @Component
 public class InMemoryUserStorage implements UserStorage {
 
-    /* InMemoryUserStorage хранит данные о пользователях в оперативной памяти */
     private Long counter = 1L; /* счетчик id */
     private final Map<Long, User> users = new HashMap<>(); /* мапа, где хранятся фильмы. id - ключ */
 
@@ -49,18 +51,34 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public List<User> findUserFriendList(Long id) {
+    public List<User> findUserFriendList(long id) {
         return findUserById(id).getUserFriends().stream()
                 .map(this::findUserById)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public User findUserById(Long id) {
+    public User findUserById(long id) {
         if (users.containsKey(id)) {
             return users.get(id);
         } else {
             throw new UserNotFoundException("Такого пользователя нет в системе");
         }
+    }
+
+    /* добавлены заглушки на неиспользуемые методы */
+
+    @Override
+    public Friendship findFriendship(long user1Id, long user2Id) {
+        return null;
+    }
+
+    @Override
+    public Friendship updateFriendship(Friendship friendship) {
+        return null;
+    }
+
+    @Override
+    public void removeFriendship(Friendship friendship) {
     }
 }
