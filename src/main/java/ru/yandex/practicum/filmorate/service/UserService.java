@@ -34,7 +34,7 @@ public class UserService {
         Friendship friendship = userStorage.findFriendship(id, friendId);
         if (friendship != null) {
             if (friendship.isConfirmed()) {
-                throw new ValidationException (String.format("Пользователи %s и %s уже являются друзьями. Статус " +
+                throw new ValidationException(String.format("Пользователи %s и %s уже являются друзьями. Статус " +
                                 "дружбы: %s", id, friendId, true));
             } else if (friendship.getUser2Id() == friendId) {
                 friendship.setConfirmed(true);
