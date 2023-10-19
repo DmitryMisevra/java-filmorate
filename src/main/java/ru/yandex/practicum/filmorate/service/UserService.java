@@ -42,7 +42,7 @@ public class UserService {
                 userStorage.updateFriendship(friendship);
             } else {
                 throw new ValidationException(String.format("Пользователь %s уже отправил ранее запрос пользователю " +
-                                "%s. Статус дружбы: %s", id, friendId, false));
+                        "%s. Статус дружбы: %s", id, friendId, false));
             }
         } else {
             friendship = new Friendship(friendId, id, false);
