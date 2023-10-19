@@ -135,15 +135,6 @@ public class UserDbStorage implements UserStorage {
     private Set<Long> getFriendsLongList(long id) {
         String sql = "select * from PUBLIC.FRIENDSHIP where USER_2_ID = ? or (USER_1_ID = ? and IS_CONFIRMED = true);";
         List<Friendship> friendships = jdbcTemplate.query(sql, this::mapRowToFriendship, id, id);
-        List<Long> longList = new ArrayList<>();
-        for (Friendship friendship : friendships) {
-            if (friendship.getUser1Id() == id) {
-                longList.add(friendship.getUser2Id());
-            } else {
-                longList.add(friendship.getUser1Id());
-            }
-        }
-        return new HashSet<>(longList);
 
         return friendships.stream()
                 .map(friendship -> (friendship.getUser1Id() == id) ? friendship.getUser2Id() : friendship.getUser1Id())
