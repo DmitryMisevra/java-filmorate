@@ -9,12 +9,12 @@ import ru.yandex.practicum.filmorate.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
+/* UserController отвечает за обработку эндпойнтов по добавлению, обновлению юзеров и друзей */
+
 @RestController
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
-
-    /* UserController отвечает за обработку эндпойнтов по добавлению, обновлению юзеров и друзей */
 
     private final UserService userService;
 

@@ -10,11 +10,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+/* User отвечает за хранение данных о пользователе */
+
 @Data
 @Builder
 public class User {
-
-    /* User хранит данные о пользователе */
 
     private long id;
     private String name;

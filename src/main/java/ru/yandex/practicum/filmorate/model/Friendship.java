@@ -5,13 +5,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/* Friendship отвечает за хранение статусов дружбы между двумя пользователями */
+
 @Getter
 @Setter
 @Builder
 @EqualsAndHashCode
 public class Friendship {
-
-    /* Friendship отвечает за хранение статусов дружбы между двумя пользователями */
 
     private final long user1Id;
     private final long user2Id;

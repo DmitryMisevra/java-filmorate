@@ -10,12 +10,12 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 
 import java.util.List;
 
+/* MpaController отвечает за обработку эндпойнтов по поиску рейтингов */
+
 @RestController
 @RequestMapping("/mpa")
 @Slf4j
 public class MpaController {
-
-    /* MpaController отвечает за обработку эндпойнтов по поиску рейтингов */
 
     private final FilmService filmService;
 

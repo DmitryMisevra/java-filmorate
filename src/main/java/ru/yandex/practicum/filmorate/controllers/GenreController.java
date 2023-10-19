@@ -10,12 +10,13 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 
 import java.util.List;
 
+
+/* GenreController отвечает за обработку эндпойнтов по поиску жанров */
+
 @RestController
 @RequestMapping("/genres")
 @Slf4j
 public class GenreController {
-
-    /* GenreController отвечает за обработку эндпойнтов по поиску жанров */
 
     private final FilmService filmService;
 

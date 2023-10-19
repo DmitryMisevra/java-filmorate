@@ -9,6 +9,8 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 import javax.validation.Valid;
 import java.util.List;
 
+/* FIlmController отвечает за обработку эндпойнтов по добавлению, обновлению фильмов */
+
 @RestController
 @RequestMapping("/films")
 @Slf4j

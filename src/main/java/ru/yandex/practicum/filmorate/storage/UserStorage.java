@@ -5,9 +5,9 @@ import ru.yandex.practicum.filmorate.model.User;
 
 import java.util.List;
 
-public interface UserStorage {
+/* UserStorage отвечает за добавление, удаление, и обновление данных юзера, его поиск по id и вывод списка друзей */
 
-    /* UserStorage отвечает за добавление, удаление, и обновление данных юзера, его поиск по id и вывод списка друзей */
+public interface UserStorage {
 
     /* добавляет юзера */
     User addUser(User user);

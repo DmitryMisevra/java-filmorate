@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/* UserService отвечает за добавление и удаление друзей, вывод списка взаимных друзей с другим юзером  */
+
 @Service
 public class UserService {
 
@@ -22,9 +24,6 @@ public class UserService {
     public UserService(@Qualifier("UserDBStorage") UserStorage userStorage) {
         this.userStorage = userStorage;
     }
-
-    /* сервис отвечает за добавление и удаление друзей, вывод списка взаимных друзей с другим юзером  */
-
 
     /* добавляет друга */
     public User addFriend(long id, long friendId) {

@@ -20,11 +20,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/* FilmDbStorage отвечает за хранение данные о фильмах в базе SQL */
+
 @Component
 @Qualifier("filmDBStorage")
 public class FilmDbStorage implements FilmStorage {
-
-    /* FilmDbStorage хранит данные о фильмах в базе SQL */
 
     private final JdbcTemplate jdbcTemplate;
 

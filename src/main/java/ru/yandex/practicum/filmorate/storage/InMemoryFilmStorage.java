@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/* InMemoryFilmStorage отвечает за хранение данных о фильмах в оперативной памяти */
+
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
 

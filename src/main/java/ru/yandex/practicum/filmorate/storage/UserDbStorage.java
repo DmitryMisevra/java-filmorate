@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/* UserDbStorage отвечает за хранение данные о пользователях в базе SQL */
+
 @Component
 @Qualifier("UserDBStorage")
 public class UserDbStorage implements UserStorage {

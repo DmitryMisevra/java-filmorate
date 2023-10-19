@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/* InMemoryUserStorage отвечает ха хранение данных о пользователях в оперативной памяти */
+
 @Component
 public class InMemoryUserStorage implements UserStorage {
 
-    /* InMemoryUserStorage хранит данные о пользователях в оперативной памяти */
     private Long counter = 1L; /* счетчик id */
     private final Map<Long, User> users = new HashMap<>(); /* мапа, где хранятся фильмы. id - ключ */
 

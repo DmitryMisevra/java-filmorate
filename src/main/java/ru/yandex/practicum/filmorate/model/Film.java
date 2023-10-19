@@ -12,11 +12,11 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/* Film отвечает за хранение данных о фильме */
+
 @Data
 @Builder
 public class Film {
-
-    /* фильм хранит данные о фильме */
 
     private long id;
     @NotBlank

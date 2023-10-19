@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/* FilmService отвечает за добавление и удаление лайков + вывод списка самых популярных фильмов  */
+
 @Service
 public class FilmService {
-
-    /* сервис отвечает за добавление и удаление лайков + вывод списка самых популярных фильмов  */
 
     private final FilmStorage filmStorage;
 
