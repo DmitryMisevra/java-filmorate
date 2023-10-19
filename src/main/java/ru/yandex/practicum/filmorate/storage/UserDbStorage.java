@@ -131,7 +131,7 @@ public class UserDbStorage implements UserStorage {
                 .build();
     }
 
-    /* Вспомогательный метод. Возвращает список id друзей пользовтателя. */
+    /* Вспомогательный метод. Возвращает список id друзей пользователя. */
     private Set<Long> getFriendsLongList(long id) {
         String sql = "select * from PUBLIC.FRIENDSHIP where USER_2_ID = ? or (USER_1_ID = ? and" +
                 " IS_CONFIRMED = true);";
