@@ -125,7 +125,7 @@ class FilmorateApplicationTests {
 
         assertThatThrownBy(() -> userStorage.updateUser(user))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessage("Такого пользователя нет в системе");
+                .hasMessage(String.format("Пользователя с id %s нет в системе", 9999));
     }
 
     @Test
@@ -205,7 +205,7 @@ class FilmorateApplicationTests {
     public void testFindUserByIdShouldThrowUserNotFoundExceptionWhenUserIdIsUnknown() {
         assertThatThrownBy(() -> userStorage.findUserById(9999))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessage("Такого пользователя нет в системе");
+                .hasMessage(String.format("Пользователя с id %s нет в системе", 9999));
     }
 
     @Test
@@ -387,7 +387,7 @@ class FilmorateApplicationTests {
 
         assertThatThrownBy(() -> filmStorage.updateFilm(updatedFilm))
                 .isInstanceOf(FilmNotFoundException.class)
-                .hasMessage("Такого фильма нет в системе");
+                .hasMessage(String.format("Фильма с id %s нет в системе", 3));
     }
 
     @Test
@@ -421,7 +421,7 @@ class FilmorateApplicationTests {
     public void testFindFilmByIdShouldThrowFilmNotFoundExceptionWithWrongId() {
         assertThatThrownBy(() -> filmStorage.findFilmById(9999))
                 .isInstanceOf(FilmNotFoundException.class)
-                .hasMessage("Такого фильма нет в системе");
+                .hasMessage(String.format("Фильма с id %s нет в системе", 9999));
     }
 
 
@@ -481,7 +481,7 @@ class FilmorateApplicationTests {
     public void findGenreByIdShouldThrowGenreNotFoundExceptionWithWrongId() {
         assertThatThrownBy(() -> filmStorage.findGenreByid(9999))
                 .isInstanceOf(GenreNotFoundException.class)
-                .hasMessage("Такого жанра нет в системе");
+                .hasMessage(String.format("Жанра с id %s нет в системе", 9999));
     }
 
     @Test
@@ -510,7 +510,7 @@ class FilmorateApplicationTests {
     public void testFindMpaByidShouldThrowMpaNotFoundExceptionWithWrongMpaId() {
         assertThatThrownBy(() -> filmStorage.findMpaByid(9999))
                 .isInstanceOf(MpaNotFoundException.class)
-                .hasMessage("Такого рейтинга нет в системе");
+                .hasMessage(String.format("Рейтинга с id %s нет в системе", 9999));
 
     }
 

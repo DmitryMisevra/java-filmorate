@@ -73,7 +73,7 @@ public class UserDbStorage implements UserStorage {
         try {
             return jdbcTemplate.queryForObject(sql, this::mapRowToUser, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new UserNotFoundException("Такого пользователя нет в системе");
+            throw new UserNotFoundException(String.format("Пользователя с id %s нет в системе", id));
         }
     }
 

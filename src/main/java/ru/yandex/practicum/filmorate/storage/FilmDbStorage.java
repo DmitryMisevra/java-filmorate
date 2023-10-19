@@ -72,7 +72,7 @@ public class FilmDbStorage implements FilmStorage {
             String sql = "select * from PUBLIC.FILM where FILM_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToFilm, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new FilmNotFoundException("Такого фильма нет в системе");
+            throw new FilmNotFoundException(String.format("Фильма с id %s нет в системе", id));
         }
     }
 
@@ -94,7 +94,7 @@ public class FilmDbStorage implements FilmStorage {
             String sql = "select * from PUBLIC.GENRE where GENRE_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToGenre, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new GenreNotFoundException("Такого жанра нет в системе");
+            throw new GenreNotFoundException(String.format("Жанра с id %s нет в системе", id));
         }
     }
 
@@ -110,7 +110,7 @@ public class FilmDbStorage implements FilmStorage {
             String sql = "select * from PUBLIC.MPA where MPA_ID = ?";
             return jdbcTemplate.queryForObject(sql, this::mapRowToMpa, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new MpaNotFoundException("Такого рейтинга нет в системе");
+            throw new MpaNotFoundException(String.format("Рейтинга с id %s нет в системе", id));
         }
     }
 

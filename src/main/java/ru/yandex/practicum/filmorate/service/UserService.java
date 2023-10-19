@@ -34,12 +34,15 @@ public class UserService {
         Friendship friendship = userStorage.findFriendship(id, friendId);
         if (friendship != null) {
             if (friendship.isConfirmed()) {
-                throw new ValidationException("Пользователи уже являются друзьями");
+                throw new ValidationException
+                        (String.format("Пользователи %s и %s уже являются друзьями. Статус дружбы: %s", id, friendId,
+                                true));
             } else if (friendship.getUser2Id() == friendId) {
                 friendship.setConfirmed(true);
                 userStorage.updateFriendship(friendship);
             } else {
-                throw new ValidationException("Запрос уже был отправлен ранее");
+                throw new ValidationException(String.format("Пользователь %s уже отправил ранее запрос пользователю " +
+                                "%s. Статус дружбы: %s", id, friendId, false));
             }
         } else {
             friendship = new Friendship(friendId, id, false);
@@ -60,7 +63,8 @@ public class UserService {
         if (friendship != null) {
             userStorage.removeFriendship(friendship);
         } else {
-            throw new ValidationException("Пользователи не являются друзьями");
+            throw new ValidationException(String.format("Не найдена дружба между пользователями %s и %s", id,
+                    friendId));
         }
         return userStorage.findUserById(id);
     }
