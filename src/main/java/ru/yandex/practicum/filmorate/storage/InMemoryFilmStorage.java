@@ -3,12 +3,16 @@ package ru.yandex.practicum.filmorate.storage;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Genre;
+import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.util.FilmValidation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/* InMemoryFilmStorage отвечает за хранение данных о фильмах в оперативной памяти */
 
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
@@ -40,7 +44,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film findFilmById(Long id) {
+    public Film findFilmById(long id) {
         if (films.containsKey(id)) {
             return films.get(id);
         } else {
@@ -51,5 +55,27 @@ public class InMemoryFilmStorage implements FilmStorage {
     @Override
     public List<Film> getFilmsList() {
         return new ArrayList<>(films.values());
+    }
+
+
+    /* добавлены заглушки на неиспользуемые методы */
+    @Override
+    public List<Genre> getGenresList() {
+        return null;
+    }
+
+    @Override
+    public Genre findGenreByid(long id) {
+        return null;
+    }
+
+    @Override
+    public List<Mpa> getMpaList() {
+        return null;
+    }
+
+    @Override
+    public Mpa findMpaByid(long id) {
+        return null;
     }
 }
