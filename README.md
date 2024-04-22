@@ -92,8 +92,8 @@
 1. Клонируйте репозиторий проекта:
 
 ```
-git clone https://https://github.com/DmitryMisevra/java-explore-with-me.git
-cd java-explore-with-me
+git clone https://https://github.com/DmitryMisevra/java-filmorate.git
+cd java-filmorate
 ```
 
 2. Соберите проект с помощью Maven:
